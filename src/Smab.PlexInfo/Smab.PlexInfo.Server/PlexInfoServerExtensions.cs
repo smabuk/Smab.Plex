@@ -12,12 +12,12 @@ public static class PlexInfoServerExtensions
 	{
 		ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
-		_plexSettings = builder.Configuration.GetSection(nameof(PlexSettings)).Get<PlexSettings>();
+		_plexSettings = builder.Configuration.GetSection(nameof(PlexSettings)).Get<PlexSettings>() ?? new();
 
-		builder.Services.Configure<PlexSettings>(builder.Configuration.GetSection(nameof(PlexSettings)));
+		_ = builder.Services.Configure<PlexSettings>(builder.Configuration.GetSection(nameof(PlexSettings)));
 
 		// Register the HttpClient for use in the controllers and services
-		builder.Services.AddHttpClient<IPlexClient, PlexClient>()
+		_ = builder.Services.AddHttpClient<IPlexClient, PlexClient>()
 		// The local Plex Server will not have a proper certificate so we have to ignore this
 		.ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler()
 		{
@@ -52,14 +52,12 @@ public static class PlexInfoServerExtensions
 
 	public static IMvcBuilder ConfigurePlexInfoApis(this IMvcBuilder builder, Action<PlexSettings>? options = null)
 	{
-		ArgumentNullException.ThrowIfNull(nameof(builder));
-
 		PlexSettings plexSettings = new();
 		options?.Invoke(plexSettings);
 
 		_plexSettings.ThumbnailCacheDuration = plexSettings.ThumbnailCacheDuration ?? _plexSettings.ThumbnailCacheDuration;
 
-		builder.AddMvcOptions(opt =>
+		_ = builder.AddMvcOptions(opt =>
 			opt.CacheProfiles.Add("PlexInfoThumbnails",
 			new()
 			{
