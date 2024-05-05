@@ -1,0 +1,15 @@
+﻿@if (Roles is not null)
+{
+    <h2>Cast</h2>
+    <div class="card-group">
+        @foreach (var role in Roles)
+        {
+            <text><CastMember Role="@role" /></text>
+        }
+    </div>
+}
+
+@code {
+    [Parameter]
+    public IList<RoleSubitem>? Roles { get; set; }
+}

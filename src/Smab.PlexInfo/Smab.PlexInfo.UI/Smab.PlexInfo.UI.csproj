@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0.2" />
+		<PackageReference Include="Smab.Helpers" Version="1.2.13" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Smab.PlexInfo\Smab.PlexInfo.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Remove="compilerconfig.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="compilerconfig.json" />
+	</ItemGroup>
+
+</Project>

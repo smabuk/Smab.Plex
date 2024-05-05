@@ -1,0 +1,36 @@
+﻿@import "common.scss";
+
+.card {
+    min-width: $THUMB_WIDTH * 2 + 2px;
+    max-width: $THUMB_WIDTH * 2 + 2px;
+    height: $THUMB_HEIGHT + 50px;
+    margin-right: .5rem;
+    margin-bottom: .5rem;
+    border: none;
+
+    img {
+        width: $THUMB_WIDTH * 2;
+        /*height: $THUMB_HEIGHT;*/
+        /*border-radius: $THUMB_WIDTH / 5;*/
+    }
+
+    .card-body {
+        line-height: 1.5;
+        padding: 0.2rem;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .card-title {
+        margin: 0;
+    }
+}
+

@@ -1,0 +1,37 @@
+﻿@page "/plex/tv"
+@inject PlexInfoClient plexClient
+@inject PlexInfoState piState
+<PageTitle>Plex TV Shows - smabPlayground2020</PageTitle>
+
+<p><em>@Message</em></p>
+@if (items is not null)
+{
+<div class="card-group">
+    @*<Virtualize Items="@items" Context="item" >*@
+    @foreach (var item in items)
+    {
+        <TVCard Item="item" />
+    }
+    @*</Virtualize>*@
+</div>
+}
+
+@code {
+
+    private const int THUMB_WIDTH = 200;
+    private const int THUMB_HEIGHT = 300;
+
+    public string Message { get; set; } = "Loading TV shows ...";
+
+    private List<TvShowSummary>? items { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (piState.TvShowsList is null)
+        {
+            piState.TvShowsList = (await plexClient.GetTvShowsList() ?? new()).ToList();
+        }
+        items = piState.TvShowsList;
+        Message = $"Showing {items.Count} TV shows";
+    }
+}

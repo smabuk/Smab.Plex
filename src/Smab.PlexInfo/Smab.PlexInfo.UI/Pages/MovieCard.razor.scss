@@ -1,0 +1,51 @@
+﻿@import "common.scss";
+
+.card {
+    min-width: $THUMB_WIDTH + 2px;
+    max-width: $THUMB_WIDTH + 2px;
+    height: $THUMB_HEIGHT + 70px;
+    margin-right: .25rem;
+    margin-bottom: .25rem;
+    border: none;
+
+    img {
+        width: $THUMB_WIDTH;
+        height: $THUMB_HEIGHT;
+        border-radius: $THUMB_WIDTH / 5;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .card-body {
+        line-height: 1.5;
+        padding: 0.2rem;
+    }
+}
+
+input[type=checkbox] {
+    position: absolute;
+    opacity: 0%;
+    cursor: pointer;
+    height: 10%;
+    width: 17%;
+    top: 0;
+    left: 0;
+    border-color: transparent;
+    border-radius: 50%;
+
+    &:hover {
+        opacity: 60%;
+    }
+
+    &:checked {
+        opacity: 100%;
+    }
+}

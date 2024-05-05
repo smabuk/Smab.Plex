@@ -1,0 +1,60 @@
+﻿@if (Item is not null)
+{
+	<div class="card">
+		@if (CheckboxEnabled)
+		{
+			<input type="checkbox" @onchange="ItemChangedCallback" />
+			<div class="tickmark"></div>
+		}
+		<a href="/Plex/Details/@Item.Id" title="@Item.Title">
+			@if (String.IsNullOrEmpty(Item.Thumb))
+			{
+				<img src="_content/Smab.PlexInfo.UI/images/tv.png" class="card-img" loading="lazy" alt="..." />
+			}
+			else
+			{
+				<img src="/PlexInfo/Photo?url=@(Item.Thumb)&width=@(THUMB_WIDTH)&height=@(THUMB_HEIGHT)" class="card-img" loading="lazy" alt="..." />
+			}
+		</a>
+		<div class="card-body">
+			<a href="/Plex/Details/@Item.Id" title="@Item.Title">
+				<div class="text-truncate">@Item.Title</div>
+			</a>
+			<div class="card-subtitle">@Item.Seasons @((Item.Seasons == 1) ? "season" : "seasons")  @Item.Episodes @((Item.Episodes == 1) ? "episode" : "episodes")</div>
+			@if (Item.OriginallyAvailableAt is not null)
+			{
+				if (Item.OriginallyAvailableAt?.Year > 1)
+				{
+					<div class="card-subtitle">@Item.OriginallyAvailableAt?.ToString("dd MMM yyyy")</div>
+				}
+			}
+		</div>
+	</div>
+}
+else
+{
+	<div class="card">
+	</div>
+}
+
+@code {
+
+	private const int THUMB_WIDTH = 200;
+	private const int THUMB_HEIGHT = 300;
+
+	[Parameter]
+	[EditorRequired]
+	public TvShowSummary? Item { get; set; }
+
+	public bool CheckboxEnabled => OnItemChangedCallback.HasDelegate;
+
+
+	[Parameter]
+	public EventCallback<TvShowSummary> OnItemChangedCallback { get; set; }
+
+	private async Task ItemChangedCallback(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+	{
+		await OnItemChangedCallback.InvokeAsync(Item);
+	}
+
+}

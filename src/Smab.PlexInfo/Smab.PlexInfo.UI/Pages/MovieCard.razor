@@ -1,0 +1,66 @@
+﻿@if (Item is not null)
+{
+	<div class="card">
+		@if (CheckboxEnabled)
+		{
+			<input type="checkbox" @onchange="ItemChangedCallback" />
+			<div class="tickmark"></div>
+		}
+		<a href="/Plex/Details/@Item.Id" title="@Item.Title">
+			@if (String.IsNullOrEmpty(Item.Thumb))
+			{
+				<img src="_content/Smab.PlexInfo.UI/images/tv.png" class="card-img" loading="lazy" alt="..." />
+			}
+			else
+			{
+				<img src="/PlexInfo/Photo?url=@(Item.Thumb)&width=@(THUMB_WIDTH)&height=@(THUMB_HEIGHT)" class="card-img" loading="lazy" alt="..." />
+			}
+		</a>
+		<div class="card-body">
+			<a href="/Plex/Details/@Item.Id" title="@Item.Title">
+				<div class="text-truncate">@Item.Title</div>
+			</a>
+			@if (Item.OriginallyAvailableAt is not null)
+			{
+				if (Item.OriginallyAvailableAt?.Year > 1)
+				{
+					<div class="card-subtitle">@Item.OriginallyAvailableAt?.ToString("dd MMM yyyy")</div>
+				}
+				else
+				{
+					<div class="card-subtitle">@Item.Year</div>
+				}
+			}
+			@if (Item.Rating is not null || Item.AudienceRating is not null) {
+				<div class="card-subtitle">Rating: @(Item.Rating is null ? "NA" : $"{Item.Rating * 10}%") @(Item.AudienceRating is null ? "" : $" / {Item.AudienceRating * 10}%")</div>
+			}
+		</div>
+	</div>
+}
+else
+{
+	<div class="card">
+	</div>
+}
+
+@code {
+
+	private const int THUMB_WIDTH = 200;
+	private const int THUMB_HEIGHT = 300;
+
+	[Parameter]
+	[EditorRequired]
+	public MovieSummary? Item { get; set; }
+
+	public bool CheckboxEnabled => OnItemChangedCallback.HasDelegate;
+
+
+	[Parameter]
+	public EventCallback<MovieSummary> OnItemChangedCallback { get; set; }
+
+	private async Task ItemChangedCallback(Microsoft.AspNetCore.Components.ChangeEventArgs e)
+	{
+		await OnItemChangedCallback.InvokeAsync(Item);
+	}
+
+}

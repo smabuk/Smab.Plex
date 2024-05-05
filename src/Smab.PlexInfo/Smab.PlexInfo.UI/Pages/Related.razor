@@ -1,0 +1,30 @@
+﻿<h2>Related</h2>
+<div class="card-group">
+@*
+@foreach (var item in Seasons)
+    {
+        <div class="card">
+            <a href="/Plex/Details/@item.RatingKey" title="@item.Title">
+                @if (String.IsNullOrEmpty(item.Thumb)) {
+                    <img src="_content/Smab.PlexInfo.UI/images/tv.png" class="card-img" alt="..." />
+                } else {
+                    <img src="/PlexInfo/Photo?url=@(item.Thumb)&width=@(THUMB_WIDTH)&height=@(THUMB_HEIGHT)" class="card-img" loading="lazy" alt="..." />
+                }
+            </a>
+            <div class="card-body">
+                <a href="/Plex/Details/@item.RatingKey" title="@item.Title"><div class="card-title text-truncate">@item.Title</div></a>
+                <div class="card-subtitle">@item.LeafCount @((item.LeafCount == 1) ? "episode" : "episodes")</div>
+            </div>
+        </div>
+    }
+*@
+</div>
+<br />
+
+@code {
+    private const int THUMB_WIDTH = 200;
+    private const int THUMB_HEIGHT = 300;
+
+    [Parameter]
+    public int Id { get; set; }
+}
