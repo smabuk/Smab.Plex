@@ -5,6 +5,7 @@ using Smab.Plex.Web.Client.Pages;
 using Smab.Plex.Web.Components;
 using Smab.Plex.Web.Components.Account;
 using Smab.Plex.Web.Data;
+using Smab.PlexInfo.Server;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents()
     .AddInteractiveWebAssemblyComponents();
+
+builder.AddPlexInfoServer();
+builder.Services.AddControllers().ConfigurePlexInfoApis();
 
 builder.Services.AddCascadingAuthenticationState();
 builder.Services.AddScoped<IdentityUserAccessor>();
@@ -61,6 +65,8 @@ app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode()
     .AddInteractiveWebAssemblyRenderMode()
     .AddAdditionalAssemblies(typeof(Smab.Plex.Web.Client._Imports).Assembly);
+
+app.MapControllers();
 
 // Add additional endpoints required by the Identity /Account Razor components.
 app.MapAdditionalIdentityEndpoints();
