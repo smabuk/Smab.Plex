@@ -1,18 +1,13 @@
-﻿@if (Item is not null)
-{
+﻿@if (Item is not null) {
 	<div class="card">
-		@if (CheckboxEnabled)
-		{
+		@if (CheckboxEnabled) {
 			<input type="checkbox" @onchange="ItemChangedCallback" />
 			<div class="tickmark"></div>
 		}
 		<a href="/Plex/Details/@Item.Id" title="@Item.Title">
-			@if (String.IsNullOrEmpty(Item.Thumb))
-			{
+			@if (String.IsNullOrEmpty(Item.Thumb)) {
 				<img src="_content/Smab.PlexInfo.UI/images/tv.png" class="card-img" loading="lazy" alt="..." />
-			}
-			else
-			{
+			} else {
 				<img src="/PlexInfo/Photo?url=@(Item.Thumb)&width=@(THUMB_WIDTH)&height=@(THUMB_HEIGHT)" class="card-img" loading="lazy" alt="..." />
 			}
 		</a>
@@ -20,19 +15,19 @@
 			<a href="/Plex/Details/@Item.Id" title="@Item.Title">
 				<div class="text-truncate">@Item.Title</div>
 			</a>
-			<div class="card-subtitle">@Item.Seasons @((Item.Seasons == 1) ? "season" : "seasons")  @Item.Episodes @((Item.Episodes == 1) ? "episode" : "episodes")</div>
-			@if (Item.OriginallyAvailableAt is not null)
-			{
-				if (Item.OriginallyAvailableAt?.Year > 1)
-				{
+			@if (Item.OriginallyAvailableAt is not null) {
+				if (Item.OriginallyAvailableAt?.Year > 1) {
 					<div class="card-subtitle">@Item.OriginallyAvailableAt?.ToString("dd MMM yyyy")</div>
+				} else {
+					<div class="card-subtitle">@Item.Year</div>
 				}
+			}
+			@if (Item.Rating is not null || Item.AudienceRating is not null) {
+				<div class="card-subtitle">Rating: @(Item.Rating is null ? "NA" : $"{Item.Rating * 10}%") @(Item.AudienceRating is null ? "" : $" / {Item.AudienceRating * 10}%")</div>
 			}
 		</div>
 	</div>
-}
-else
-{
+} else {
 	<div class="card">
 	</div>
 }
@@ -44,13 +39,13 @@ else
 
 	[Parameter]
 	[EditorRequired]
-	public TvShowSummary? Item { get; set; }
+	public MovieSummary? Item { get; set; }
 
 	public bool CheckboxEnabled => OnItemChangedCallback.HasDelegate;
 
 
 	[Parameter]
-	public EventCallback<TvShowSummary> OnItemChangedCallback { get; set; }
+	public EventCallback<MovieSummary> OnItemChangedCallback { get; set; }
 
 	private async Task ItemChangedCallback(Microsoft.AspNetCore.Components.ChangeEventArgs e)
 	{

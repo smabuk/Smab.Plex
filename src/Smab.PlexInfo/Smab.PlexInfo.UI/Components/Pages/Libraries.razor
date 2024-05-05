@@ -1,0 +1,36 @@
+﻿@page "/plex/libraries"
+@inject IPlexClient plexClient
+@inject PlexInfoState piState
+<PageTitle>Plex Libraries</PageTitle>
+
+<h3>Libraries</h3>
+
+@foreach (var item in items) {
+	<div class="card" style="max-width: 300px;">
+		<div class="row g-0">
+			<div class="col-md-4">
+				<img src="/PlexInfo/resource/@((item.Thumb ?? "video.png").Replace(@"/:/resources/", ""))" width="80" alt="@item.Title" />
+			</div>
+			<div class="col-md-8">
+				<div class="card-body text-center mt-3">
+					<div class="card-title font-weight-bold">@item.Title</div>
+				</div>
+			</div>
+		</div>
+	</div>
+}
+
+@code {
+	public string Message { get; set; } = "Loading libraries ...";
+
+	private List<LibraryDirectory> items { get; set; } = new();
+
+	protected override async Task OnInitializedAsync()
+	{
+		items = (await plexClient.GetLibrarySections())
+			.MediaContainer?.Directory?
+			.Where(l => l.Hidden == 0)
+			.OrderBy(l => l.Type)
+			.ToList() ?? new();
+	}
+}

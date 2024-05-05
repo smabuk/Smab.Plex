@@ -1,0 +1,5 @@
+﻿:root {
+	--thumb-width: 200px;
+	--thumb-height: 300px;
+	--thumb-aspect-ratio: 2 / 3;
+}

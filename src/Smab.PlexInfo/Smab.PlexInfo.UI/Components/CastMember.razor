@@ -1,0 +1,20 @@
+﻿@if (Role is not null) {
+	<div class="card">
+		<div class="card-header text-center">
+			@if (String.IsNullOrWhiteSpace(Role.Thumb) || (Role.Thumb == "https://artworks.thetvdb.com/banners/")) {
+				<img src="_content/Smab.PlexInfo.UI/images/head-and-shoulders.png" class="cast-no-photo" />
+			} else {
+				<img src="@(Role.Thumb.Replace("http:", "https:"))" loading="lazy" class="cast-photo" alt="@Role.Tag as @Role.Role" />
+			}
+		</div>
+		<div class="card-body">
+			<a href="#"><div class="card-title">@Role.Tag</div></a>
+			<div class="card-text">@Role.Role</div>
+		</div>
+	</div>
+}
+
+@code {
+	[Parameter]
+	public RoleSubitem? Role { get; set; }
+}

@@ -36,9 +36,9 @@ public static class PlexInfoServerExtensions
 	{
 		ArgumentNullException.ThrowIfNull(builder, nameof(builder));
 
-		builder.AddPlexInfoServer();
-		
-		builder.Services.PostConfigure(options);
+		_ = builder.AddPlexInfoServer();
+
+		_ = builder.Services.PostConfigure(options);
 			
 		PlexSettings plexSettings = new();
 		options.Invoke(plexSettings);

@@ -1,0 +1,30 @@
+﻿@if (Episodes is not null) {
+	<h2>Episodes</h2>
+	<div class="card-group">
+		@foreach (Metadata item in Episodes) {
+			int thumbWidth = (int)((THUMB_HEIGHT * item.Media?.FirstOrDefault()?.AspectRatio) ?? THUMB_WIDTH);
+			<div class="card">
+				<a href="/Plex/Details/@item.RatingKey" title="@item.Title">
+					@if (String.IsNullOrEmpty(item.Thumb)) {
+						<img src="_content/Smab.PlexInfo.UI/images/tv.png" class="card-img" width="@(THUMB_WIDTH)px" height="@(THUMB_HEIGHT)px" alt="..." />
+					} else {
+						<img src="/PlexInfo/Photo?url=@(item.Thumb)&width=@(THUMB_WIDTH)" class="card-img" loading="lazy" alt="..." />
+					}
+				</a>
+				<div class="card-body">
+					<a href="/Plex/Details/@item.RatingKey" title="@item.Title"><div class="card-title text-truncate">@item.Title</div></a>
+					<div class="card-subtitle">Episode @item.Index</div>
+				</div>
+			</div>
+		}
+	</div>
+	<br />
+}
+
+@code {
+	private const int THUMB_HEIGHT = 300;
+	private const int THUMB_WIDTH = 400;
+
+	[Parameter]
+	public List<Metadata> Episodes { get; set; } = new();
+}

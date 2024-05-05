@@ -11,10 +11,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Smab.PlexInfo\Smab.PlexInfo.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Remove="compilerconfig.json" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="compilerconfig.json" />
-  </ItemGroup>
 </Project>

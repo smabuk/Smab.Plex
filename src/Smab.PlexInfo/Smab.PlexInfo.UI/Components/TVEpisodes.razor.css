@@ -1,0 +1,33 @@
+﻿.card {
+	min-width: 402px;
+	max-width: 402px;
+	height: 350px;
+	margin-right: 0.5rem;
+	margin-bottom: 0.5rem;
+	border: none;
+}
+
+	.card img {
+		width: 400px;
+		/*height: $THUMB_HEIGHT;*/
+		/*border-radius: $THUMB_WIDTH / 5;*/
+	}
+
+	.card .card-body {
+		line-height: 1.5;
+		padding: 0.2rem;
+	}
+
+	.card a {
+		text-decoration: none;
+		font-weight: bold;
+		color: black;
+	}
+
+		.card a:hover {
+			text-decoration: underline;
+		}
+
+	.card .card-title {
+		margin: 0;
+	}

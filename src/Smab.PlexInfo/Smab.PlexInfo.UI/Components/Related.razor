@@ -1,7 +1,7 @@
 ﻿<h2>Related</h2>
 <div class="card-group">
 @*
-@foreach (var item in Seasons)
+	@foreach (Metadata item in Seasons)
     {
         <div class="card">
             <a href="/Plex/Details/@item.RatingKey" title="@item.Title">
