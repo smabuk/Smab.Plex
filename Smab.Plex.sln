@@ -9,9 +9,37 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{FAEDEAAD-5D75-43A1-87CB-D60D179A02EE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{C2B62B22-C73D-455C-AFC3-DE484CC864B6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smab.Plex.Web", "src\Smab.Plex.Web\Smab.Plex.Web\Smab.Plex.Web.csproj", "{AABACECC-4C66-40E7-A74A-A42A2CFA4E64}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smab.Plex.Web.Client", "src\Smab.Plex.Web\Smab.Plex.Web.Client\Smab.Plex.Web.Client.csproj", "{96D198AB-C17E-4552-8034-4FA2B6A11621}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AABACECC-4C66-40E7-A74A-A42A2CFA4E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AABACECC-4C66-40E7-A74A-A42A2CFA4E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AABACECC-4C66-40E7-A74A-A42A2CFA4E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AABACECC-4C66-40E7-A74A-A42A2CFA4E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96D198AB-C17E-4552-8034-4FA2B6A11621}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96D198AB-C17E-4552-8034-4FA2B6A11621}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96D198AB-C17E-4552-8034-4FA2B6A11621}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96D198AB-C17E-4552-8034-4FA2B6A11621}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FAEDEAAD-5D75-43A1-87CB-D60D179A02EE} = {4D3F0EB4-6C88-4794-9289-1029F92FDEBB}
+		{C2B62B22-C73D-455C-AFC3-DE484CC864B6} = {FAEDEAAD-5D75-43A1-87CB-D60D179A02EE}
+		{AABACECC-4C66-40E7-A74A-A42A2CFA4E64} = {C2B62B22-C73D-455C-AFC3-DE484CC864B6}
+		{96D198AB-C17E-4552-8034-4FA2B6A11621} = {C2B62B22-C73D-455C-AFC3-DE484CC864B6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C4F47966-1B0C-47BB-BDB3-276DB8D08392}
