@@ -23,10 +23,7 @@ public static class PlexInfoServerExtensions
 		{
 			ClientCertificateOptions = ClientCertificateOption.Manual,
 			ServerCertificateCustomValidationCallback =
-			(httpRequestMessage, cert, certChain, policyErrors) =>
-			{
-				return true;
-			}
+			(httpRequestMessage, cert, certChain, policyErrors) => true
 		});
 
 		return builder;

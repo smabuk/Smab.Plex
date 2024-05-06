@@ -32,7 +32,7 @@ public class PlexInfoController(IPlexClient plexClient) : ControllerBase {
 
 	[HttpGet("{id}", Name = nameof(Item))]
 	public async Task<IActionResult> Item(int id) {
-		var item = await plexClient.GetItem(id);
+		Models.LibraryItem? item = await plexClient.GetItem(id);
 		return (item is null) || (item.MediaContainer?.Size == 0)
 			? NotFound(null)
 			: Ok(item);
@@ -40,7 +40,7 @@ public class PlexInfoController(IPlexClient plexClient) : ControllerBase {
 
 	[HttpGet("{id}", Name = nameof(ItemChildren))]
 	public async Task<IActionResult> ItemChildren(int id) {
-		var item = await plexClient.GetItemChildren(id);
+		Models.LibraryItem? item = await plexClient.GetItemChildren(id);
 		return (item is null) || (item.MediaContainer?.Size == 0)
 			? NotFound(null)
 			: Ok(item);
@@ -48,24 +48,19 @@ public class PlexInfoController(IPlexClient plexClient) : ControllerBase {
 
 	[HttpGet(Name = nameof(Photo))]
 	// Cache photos/thumbnails for 1 hour (3600 seconds)
-	[ResponseCache(VaryByQueryKeys = new[] { "url", "width", "height" }, CacheProfileName = "PlexInfoThumbnails")]
-	public async Task<IActionResult> Photo([FromQuery] string url, [FromQuery] int width = 180, [FromQuery] int height = 270) {
+	[ResponseCache(VaryByQueryKeys = ["url", "width", "height"], CacheProfileName = "PlexInfoThumbnails")]
+	public async Task<IActionResult> Photo([FromQuery] string url, [FromQuery] int width = 200, [FromQuery] int height = 300) {
 		byte[]? item = await plexClient.GetPhotoFromUrl(url, width, height);
-		return item switch
-		{
-			null => NotFound(null),
-			_ => new FileContentResult(item, "image/jpeg")
-		};
+		return (item is null)
+			? NotFound(null)
+			: new FileContentResult(item, "image/jpeg");
 	}
 
 	[HttpGet("{resource}", Name = nameof(Resource))]
 	public async Task<IActionResult> Resource(string resource) {
 		byte[]? item = await plexClient.GetResource(resource);
-		return item switch
-		{
-			null => NotFound(null),
-			_ => new FileContentResult(item, "image/png")
-		};
+		return (item is null)
+			? NotFound(null)
+			: new FileContentResult(item, "image/png");
 	}
-
 }
