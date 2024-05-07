@@ -1,0 +1,157 @@
+######################################################################
+#  This file is used to test against the actual PLEX SERVER          #
+#   (not the local project)                                          #
+######################################################################
+
+# Status
+GET {{PlexServerAddress}}/status/sessions
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# MyPlex
+GET {{PlexServerAddress}}/myplex/account
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# History
+GET {{PlexServerAddress}}/status/sessions/history/all?limit=10
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Server Identity
+GET {{PlexServerAddress}}/identity
+Accept: application/json
+
+###
+
+# System
+GET {{PlexServerAddress}}/system
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Servers
+GET {{PlexServerAddress}}/servers
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Server Preferences
+GET {{PlexServerAddress}}/:/prefs
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Statistics Bandwidth
+GET {{PlexServerAddress}}/statistics/bandwidth
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Statistics Bandwidth Timespan=6
+GET {{PlexServerAddress}}/statistics/bandwidth?timespan=6
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Statistics Resources
+GET {{PlexServerAddress}}/statistics/resources?timespan=6
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Updater Status
+GET {{PlexServerAddress}}/updater/status
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Media Providers
+GET {{PlexServerAddress}}/media/providers
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+
+
+
+# Library Root
+GET {{PlexServerAddress}}/library
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Library OnDeck
+GET {{PlexServerAddress}}/library/onDeck
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Library RecentlyAdded
+GET {{PlexServerAddress}}/library/recentlyAdded
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Library sections
+GET {{PlexServerAddress}}/library/sections
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Movies section search keys
+GET {{PlexServerAddress}}/library/sections/{{MovieSection}}
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# All Movies (including collections and sorted by Title)
+GET {{PlexServerAddress}}/library/sections/{{MovieSection}}/all?includeCollections=1&sort=titleSort
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+
+###
+
+# Top recent movies
+GET {{PlexServerAddress}}/library/all/top?type=1&limit=6&viewedAt%3E={{$timestamp -1 M}}
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+viewedAt%3E: {{$timestamp}}
+
+###
+
+# Top recent TV
+GET {{PlexServerAddress}}/library/all/top?type=2&limit=6&viewedAt%3E={{$timestamp -1 M}}
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+viewedAt%3E: {{$timestamp}}
+
+###
+
+# Top recent Artists
+GET {{PlexServerAddress}}/library/all/top?type=8&limit=6&viewedAt%3E={{$timestamp -1 M}}
+Accept: application/json
+X-Plex-Token: {{PlexToken}}
+viewedAt%3E: {{$timestamp}}
+
+###
+
